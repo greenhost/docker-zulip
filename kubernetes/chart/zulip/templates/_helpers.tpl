@@ -74,7 +74,7 @@ include all env variables for Zulip pods
 - name: SETTING_MEMCACHED_LOCATION
   value: "{{ template "common.names.fullname" .Subcharts.memcached }}:11211"
 - name: SETTING_RABBITMQ_HOST
-  value: "{{ template "rabbitmq.fullname" .Subcharts.rabbitmq }}"
+  value: "{{ template "common.names.fullname" .Subcharts.rabbitmq }}"
 - name: SETTING_REDIS_HOST
   value: "{{ template "common.names.fullname" .Subcharts.redis }}-headless"
 - name: SECRETS_rabbitmq_password
