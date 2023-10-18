@@ -73,6 +73,8 @@ spec:
               httpHeaders:
               - name: Host
                 value: {{ .Values.zulip.environment.SETTING_EXTERNAL_HOST | quote }}
+              - name: X-Forwarded-Proto
+                value: https
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -87,6 +89,8 @@ spec:
               httpHeaders:
               - name: Host
                 value: {{ .Values.zulip.environment.SETTING_EXTERNAL_HOST | quote }}
+              - name: X-Forwarded-Proto
+                value: https
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
