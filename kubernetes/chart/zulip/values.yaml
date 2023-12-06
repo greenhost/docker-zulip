@@ -175,6 +175,14 @@ startupProbe:
   failureThreshold: 30
   successThreshold: 1
 
+# -- Extra volumes. These will be added as inline yaml to the list of volumes
+# of the zulip pod.
+extraVolumes: []
+
+# -- Extra volume mounts. These will be added as inline yaml to the list of
+# volume mounts of the zulip container.
+extraVolumeMounts: []
+
 postSetup:
   ## The Docker entrypoint script runs commands from `/data/post-setup.d` after
   ## the Zulip application's Setup phase has completed. Scripts can be added here
