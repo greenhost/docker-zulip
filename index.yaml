@@ -40,6 +40,44 @@ entries:
     - https://github.com/greenhost/docker-zulip/releases/download/zulip-0.11.0-gh1/zulip-0.11.0-gh1.tgz
     version: 0.11.0-gh1
   - apiVersion: v2
+    appVersion: 11.0-0
+    created: "2025-08-22T15:35:25.698038343Z"
+    dependencies:
+    - name: memcached
+      repository: https://open.greenhost.net/api/v4/projects/71/packages/helm/stable
+      tags:
+      - memcached
+      version: 0.1.0
+    - name: rabbitmq
+      repository: https://groundhog2k.github.io/helm-charts/
+      tags:
+      - rabbitmq
+      version: 2.1.8
+    - name: redis
+      repository: https://groundhog2k.github.io/helm-charts/
+      tags:
+      - redis
+      version: 2.1.3
+    - alias: postgresql
+      name: postgres
+      repository: https://groundhog2k.github.io/helm-charts/
+      tags:
+      - postgresql
+      version: 1.5.7
+    description: Zulip is an open source threaded team chat that helps teams stay
+      productive and focused.
+    digest: d4d13d70a8a0b9b8696ed750aeaab62d12f0d979601deaadefe3f2e6a9324d5a
+    icon: https://raw.githubusercontent.com/zulip/zulip/main/static/images/logo/zulip-icon-square.svg
+    name: zulip
+    sources:
+    - https://github.com/zulip/zulip
+    - https://github.com/zulip/docker-zulip
+    - https://hub.docker.com/r/zulip/docker-zulip
+    type: application
+    urls:
+    - https://github.com/greenhost/docker-zulip/releases/download/zulip-0.11.0-gh1/zulip-0.11.0-gh1.tgz
+    version: 0.11.0-gh1
+  - apiVersion: v2
     appVersion: 8.4-0
     created: "2024-05-16T13:17:48.971939375Z"
     dependencies:
@@ -336,4 +374,4 @@ entries:
     urls:
     - https://github.com/greenhost/docker-zulip/releases/download/zulip-0.2.1/zulip-0.2.1.tgz
     version: 0.2.1
-generated: "2025-08-22T14:46:28.15931525Z"
+generated: "2025-08-22T15:35:25.698099247Z"
