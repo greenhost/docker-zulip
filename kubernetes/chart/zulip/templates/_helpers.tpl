@@ -81,11 +81,11 @@ include all env variables for Zulip pods
 - name: SECRETS_rabbitmq_password
   value: "{{ .Values.rabbitmq.auth.password }}"
 - name: SECRETS_postgres_password
-  value: "{{ .Values.postgresql.auth.password }}"
+  value: "{{ .Values.postgresql.userDatabase.password.value }}"
 - name: SECRETS_memcached_password
   value: "{{ .Values.memcached.memcachedPassword }}"
 - name: SECRETS_redis_password
-  value: "{{ .Values.redis.auth.password }}"
+  value: "{{ .Values.redis.password }}"
 - name: SECRETS_secret_key
   value: "{{ .Values.zulip.password }}"
 {{- range $key, $value := .Values.zulip.environment }}
