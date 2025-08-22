@@ -22,10 +22,10 @@ image:
 ## Global Docker registry secret names as an array.
 imagePullSecrets: []
 
-## Partially override common.names.fullname template (will maintain the release name).
+## Partially override zulip.fullname template (will maintain the release name).
 nameOverride: ""
 
-## Fully override common.names.fullname template.
+## Fully override zulip.fullname template.
 fullnameOverride: ""
 
 serviceAccount:
@@ -206,32 +206,64 @@ sidecars: []
 
 ## PostgreSQL settings, see [Requirements](#Requirements).
 postgresql:
-  primary:
-    containerSecurityContext:
-      runAsUser: 0
+  # securityContext:
+  #   runAsUser: 0
   ## We need to override the Postgresql image to get all the plugins Zulip needs
   image:
-    repository: zulip/zulip-postgresql
+    registry: zulip
+    repository: zulip-postgresql
     tag: 14
-  auth:
-    username: zulip
-    database: zulip
+  userDatabase:
+    name:
+      value: zulip
+    user:
+      value: zulip
+  customStartupProbe:
+    exec:
+      command:
+        - sh
+        - -c
+        - pg_isready -h localhost -U postgres
+    initialDelaySeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+    successThreshold: 1
+    periodSeconds: 10
+  customLivenessProbe:
+    exec:
+      command:
+        - sh
+        - -c
+        - pg_isready -h localhost -U postgres
+    initialDelaySeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+    periodSeconds: 10
+  customReadinessProbe:
+    exec:
+      command:
+        - sh
+        - -c
+        - pg_isready -h localhost -U postgres
+    initialDelaySeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+    periodSeconds: 10
 
 ## Rabbitmq settings, see [Requirements](#Requirements).
 rabbitmq:
-  auth:
-    username: zulip
-  ## Set this to true if you need the rabbitmq to be persistent
-  persistence:
-    enabled: false
+  authentication:
+    user:
+      value: zulip
+  # Persistence is disabled by setting neither
+  # `storage.persistentVolumeClaimName` nor `storage.requestedSize`.
 
 ## Memcached settings, see [Requirements](#Requirements).
-memcached:
-  memcachedUsername: "zulip@localhost"
+memcached: {}
 
 ## Redis settings, see [Requirements](#Requirements).
-redis:
-  architecture: standalone
-  master:
-    persistence:
-      enabled: false
+redis: {}
+  # Persistence is disabled by setting neither
+  # `storage.persistentVolumeClaimName` nor `storage.requestedSize`.

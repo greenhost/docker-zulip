@@ -67,25 +67,25 @@ include all env variables for Zulip pods
 {{- define "zulip.env" -}}
 
 - name: DB_HOST
-  value: "{{ template "postgresql.v1.primary.fullname" .Subcharts.postgresql }}"
+  value: "{{ template "postgres.fullname" .Subcharts.postgresql }}"
 - name: DB_HOST_PORT
-  value: "{{ template "postgresql.v1.service.port" .Subcharts.postgresql }}"
+  value: "{{ .Values.postgresql.service.port }}"
 - name: DB_USER
   value: "postgres"
 - name: SETTING_MEMCACHED_LOCATION
-  value: "{{ template "common.names.fullname" .Subcharts.memcached }}:11211"
+  value: "{{ template "memcached.fullname" .Subcharts.memcached }}:11211"
 - name: SETTING_RABBITMQ_HOST
-  value: "{{ template "common.names.fullname" .Subcharts.rabbitmq }}"
+  value: "{{ template "memcached.fullname" .Subcharts.rabbitmq }}"
 - name: SETTING_REDIS_HOST
-  value: "{{ template "common.names.fullname" .Subcharts.redis }}-headless"
+  value: "{{ template "redis.fullname" .Subcharts.redis }}-headless"
 - name: SECRETS_rabbitmq_password
-  value: "{{ .Values.rabbitmq.auth.password }}"
+  value: "{{ .Values.rabbitmq.authentication.password.value }}"
 - name: SECRETS_postgres_password
-  value: "{{ .Values.postgresql.auth.password }}"
+  value: "{{ .Values.postgresql.userDatabase.password.value }}"
 - name: SECRETS_memcached_password
   value: "{{ .Values.memcached.memcachedPassword }}"
 - name: SECRETS_redis_password
-  value: "{{ .Values.redis.auth.password }}"
+  value: "{{ .Values.redis.password }}"
 - name: SECRETS_secret_key
   value: "{{ .Values.zulip.password }}"
 {{- range $key, $value := .Values.zulip.environment }}

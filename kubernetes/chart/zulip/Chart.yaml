@@ -17,26 +17,27 @@ version: 0.11.0
 appVersion: "11.0-0"
 dependencies:
   - name: memcached
-    repository: oci://registry-1.docker.io/bitnamicharts
+    repository: https://open.greenhost.net/api/v4/projects/71/packages/helm/stable
     tags:
       - memcached
-    version: 7.4.16
+    version: 0.1.2
   - name: rabbitmq
-    repository: oci://registry-1.docker.io/bitnamicharts
+    repository: https://groundhog2k.github.io/helm-charts/
     tags:
       - rabbitmq
-    version: 14.7.0
+    version: 2.1.8
   - name: redis
-    repository: oci://registry-1.docker.io/bitnamicharts
+    repository: https://groundhog2k.github.io/helm-charts/
     tags:
       - redis
-    version: 20.1.4
-  - name: postgresql
-    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 2.1.3
+  - name: postgres
+    repository: https://groundhog2k.github.io/helm-charts/
+    alias: postgresql
     tags:
       - postgresql
     ## Note: values.yaml overwrites posgresql image to zulip/zulip-postgresql:14
-    version: 15.5.32
+    version: 1.5.7
 
 sources:
   - https://github.com/zulip/zulip
