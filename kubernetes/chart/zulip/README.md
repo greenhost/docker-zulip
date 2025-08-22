@@ -92,15 +92,13 @@ Now you're ready to follow [the installation instructions above](#installation).
 | podLabels | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | postSetup.scripts | object | `{}` |  |
-| postgresql.auth.database | string | `"zulip"` |  |
-| postgresql.auth.username | string | `"zulip"` |  |
-| postgresql.image.repository | string | `"zulip/zulip-postgresql"` |  |
+| postgresql.userDatabase.name.value | string | `"zulip"` |  |
+| postgresql.userDatabase.user.value | string | `"zulip"` |  |
+| postgresql.image.registry | string | `"zulip"` |  |
+| postgresql.image.repository | string | `"zulip-postgresql"` |  |
 | postgresql.image.tag | int | `14` |  |
-| postgresql.primary.containerSecurityContext.runAsUser | int | `0` |  |
-| rabbitmq.auth.username | string | `"zulip"` |  |
-| rabbitmq.persistence.enabled | bool | `false` |  |
-| redis.architecture | string | `"standalone"` |  |
-| redis.master.persistence.enabled | bool | `false` |  |
+| postgresql.securityContext.runAsUser | int | `0` |  |
+| rabbitmq.authentication.user.value | string | `"zulip"` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
 | service.port | int | `80` |  |
@@ -147,21 +145,12 @@ configuring Zulip through environment variables
 ### Dependencies
 
 The chart uses Memcached, RabbitMQ and Redis helm charts defined in
-the Bitnami Helm repository. Most of these are configured following their
+the groundhog2k Helm repository. Most of these are configured following their
 default settings, but you can check
-https://github.com/bitnami/charts/tree/master/bitnami/ for more configuration
-options of the subcharts.
+https://github.com/groundhog2k/helm-charts/tree/master/charts/ for more
+configuration options of these subcharts.
 
-For PostgreSQL the chart also uses the Bitnami chart to install it on the
+For PostgreSQL the chart also uses the groundhog2k chart to install it on the
 Kubernetes cluster. However, in this case we use Zulip's
 [zulip-postgresql](https://hub.docker.com/r/zulip/zulip-postgresql) docker
 image, because it contains the Postgresql plugins that are needed to run Zulip.
-
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| oci://registry-1.docker.io/bitnamicharts | memcached | 7.4.16 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 15.5.32 |
-| oci://registry-1.docker.io/bitnamicharts | rabbitmq | 14.7.0 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 20.1.4 |
